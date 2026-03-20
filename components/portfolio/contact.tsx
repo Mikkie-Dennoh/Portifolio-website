@@ -1,9 +1,10 @@
 import Link from "next/link"
-import { Phone, Github, Linkedin, Facebook } from "lucide-react"
+import { Phone, Github, Linkedin, Facebook, MessageCircle } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
 const contactLinks = [
   { href: "tel:+254110643510", icon: Phone, label: "+254 110 643 510", name: "Phone" },
+  { href: "https://wa.me/254110643510?text=Hello%20Dennis,%20I%20visited%20your%20portfolio%20and%20would%20like%20to%20connect.", icon: MessageCircle, label: "+254 110 643 510", name: "WhatsApp" },
   { href: "https://github.com/Mikkie-Dennoh", icon: Github, label: "@Mikkie-Dennoh", name: "GitHub" },
   { href: "https://www.linkedin.com/in/dennis-muriithi-032baa3b0", icon: Linkedin, label: "Dennis Muriithi", name: "LinkedIn" },
   { href: "https://www.facebook.com/mikkie.dennoh.2025", icon: Facebook, label: "Mikkie Dennoh", name: "Facebook" },
@@ -20,7 +21,7 @@ export function Contact() {
           {"Have a project in mind or want to collaborate? I'd love to hear from you. Let's create something amazing together."}
         </p>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
+        <div className="grid grid-cols-2 md:grid-cols-5 gap-4 mb-12">
           {contactLinks.map((link) => (
             <Link
               key={link.name}
