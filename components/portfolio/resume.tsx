@@ -1,4 +1,7 @@
-import { FileText, Download, GraduationCap, Award, Languages, Briefcase, Mail, Phone, MapPin, Github, Linkedin } from "lucide-react"
+"use client"
+
+import { FileText, Download, GraduationCap, Award, Languages, Briefcase, Phone, MapPin, Github, Linkedin } from "lucide-react"
+import { useCallback } from "react"
 
 const resumeData = {
   personalInfo: {
@@ -67,6 +70,82 @@ const resumeData = {
 }
 
 export function Resume() {
+  const handleDownloadResume = useCallback(() => {
+    // Create resume content as text
+    const resumeText = `
+═══════════════════════════════════════════════════════════════════════════════
+                              ${resumeData.personalInfo.name.toUpperCase()}
+═══════════════════════════════════════════════════════════════════════════════
+
+${resumeData.personalInfo.title}
+
+Phone: ${resumeData.personalInfo.phone}
+Location: ${resumeData.personalInfo.location}
+GitHub: ${resumeData.personalInfo.github}
+LinkedIn: ${resumeData.personalInfo.linkedin}
+
+───────────────────────────────────────────────────────────────────────────────
+                              PROFESSIONAL SUMMARY
+───────────────────────────────────────────────────────────────────────────────
+
+${resumeData.summary}
+
+───────────────────────────────────────────────────────────────────────────────
+                              WORK EXPERIENCE
+───────────────────────────────────────────────────────────────────────────────
+
+${resumeData.experience.map(exp => `
+${exp.title} | ${exp.company}
+${exp.period}
+
+${exp.description}
+
+Skills: ${exp.skills.join(", ")}
+`).join("\n")}
+
+───────────────────────────────────────────────────────────────────────────────
+                              TECHNICAL SKILLS
+───────────────────────────────────────────────────────────────────────────────
+
+Design:      ${resumeData.skills.design.join(", ")}
+Development: ${resumeData.skills.development.join(", ")}
+Media:       ${resumeData.skills.media.join(", ")}
+AI & ML:     ${resumeData.skills.ai.join(", ")}
+
+───────────────────────────────────────────────────────────────────────────────
+                              EDUCATION
+───────────────────────────────────────────────────────────────────────────────
+
+${resumeData.education.map(edu => `${edu.degree}
+${edu.school} | ${edu.period}`).join("\n\n")}
+
+───────────────────────────────────────────────────────────────────────────────
+                              CERTIFICATIONS
+───────────────────────────────────────────────────────────────────────────────
+
+${resumeData.certifications.map(cert => `• ${cert}`).join("\n")}
+
+───────────────────────────────────────────────────────────────────────────────
+                              LANGUAGES
+───────────────────────────────────────────────────────────────────────────────
+
+${resumeData.languages.map(lang => `${lang.name}: ${lang.level}`).join("\n")}
+
+═══════════════════════════════════════════════════════════════════════════════
+`
+
+    // Create a blob and download
+    const blob = new Blob([resumeText], { type: "text/plain" })
+    const url = URL.createObjectURL(blob)
+    const link = document.createElement("a")
+    link.href = url
+    link.download = "Dennis_Muriithi_Resume.txt"
+    document.body.appendChild(link)
+    link.click()
+    document.body.removeChild(link)
+    URL.revokeObjectURL(url)
+  }, [])
+
   return (
     <section id="resume" className="py-20 px-4">
       <div className="max-w-6xl mx-auto">
@@ -79,15 +158,13 @@ export function Resume() {
 
         {/* Download Button */}
         <div className="flex justify-center mb-12">
-          <a
-            href="/resume.pdf"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-3 bg-primary text-primary-foreground font-semibold px-8 py-4 rounded-lg hover:opacity-90 transition-opacity"
+          <button
+            onClick={handleDownloadResume}
+            className="inline-flex items-center gap-3 bg-primary text-primary-foreground font-semibold px-8 py-4 rounded-lg hover:opacity-90 transition-opacity cursor-pointer"
           >
             <Download className="w-5 h-5" />
             Download Full Resume
-          </a>
+          </button>
         </div>
 
         {/* Resume Preview Card */}
