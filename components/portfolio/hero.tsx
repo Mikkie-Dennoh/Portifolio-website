@@ -1,8 +1,7 @@
 "use client"
 
 import Image from "next/image"
-import Link from "next/link"
-import { useState } from "react"
+import { useState, useCallback } from "react"
 import { Menu, X } from "lucide-react"
 
 const navLinks = [
@@ -26,6 +25,23 @@ const roles = [
 export function Hero() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
+  const scrollToSection = useCallback((e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault()
+    const targetId = href.replace('#', '')
+    const element = document.getElementById(targetId)
+    if (element) {
+      const headerOffset = 80
+      const elementPosition = element.getBoundingClientRect().top
+      const offsetPosition = elementPosition + window.scrollY - headerOffset
+      
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'instant'
+      })
+    }
+    setMobileMenuOpen(false)
+  }, [])
+
   return (
     <section id="home" className="min-h-screen flex flex-col">
       {/* Navigation */}
@@ -33,22 +49,27 @@ export function Hero() {
         <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16 md:h-20">
             {/* Logo */}
-            <Link href="#home" className="text-xl md:text-2xl font-bold text-foreground">
+            <a 
+              href="#home" 
+              onClick={(e) => scrollToSection(e, '#home')}
+              className="text-xl md:text-2xl font-bold text-foreground"
+            >
               Dennis<span className="text-primary">.</span>
-            </Link>
+            </a>
 
             {/* Desktop Navigation */}
             <ul className="hidden md:flex items-center gap-8">
               {navLinks.map((link, index) => (
                 <li key={link.href}>
-                  <Link
+                  <a
                     href={link.href}
-                    className={`text-sm font-medium transition-colors hover:text-primary ${
+                    onClick={(e) => scrollToSection(e, link.href)}
+                    className={`text-sm font-medium transition-colors hover:text-primary cursor-pointer ${
                       index === 0 ? "text-primary" : "text-muted-foreground"
                     }`}
                   >
                     {link.label}
-                  </Link>
+                  </a>
                 </li>
               ))}
             </ul>
@@ -69,15 +90,15 @@ export function Hero() {
               <ul className="flex flex-col gap-4">
                 {navLinks.map((link, index) => (
                   <li key={link.href}>
-                    <Link
+                    <a
                       href={link.href}
-                      className={`block text-sm font-medium transition-colors hover:text-primary ${
+                      onClick={(e) => scrollToSection(e, link.href)}
+                      className={`block text-sm font-medium transition-colors hover:text-primary cursor-pointer ${
                         index === 0 ? "text-primary" : "text-muted-foreground"
                       }`}
-                      onClick={() => setMobileMenuOpen(false)}
                     >
                       {link.label}
-                    </Link>
+                    </a>
                   </li>
                 ))}
               </ul>
@@ -110,12 +131,13 @@ export function Hero() {
               </p>
 
               {/* CTA Button */}
-              <Link
+              <a
                 href="#projects"
-                className="inline-block bg-primary text-primary-foreground font-semibold px-8 py-4 rounded-lg hover:opacity-90 transition-opacity text-base"
+                onClick={(e) => scrollToSection(e, '#projects')}
+                className="inline-block bg-primary text-primary-foreground font-semibold px-8 py-4 rounded-lg hover:opacity-90 transition-opacity text-base cursor-pointer"
               >
                 View My Work
-              </Link>
+              </a>
             </div>
 
             {/* Right Column - Image */}
