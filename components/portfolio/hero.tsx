@@ -1,7 +1,7 @@
 "use client"
 
 import Image from "next/image"
-import { useState, useCallback } from "react"
+import { useState, useCallback, useEffect } from "react"
 import { Menu, X } from "lucide-react"
 
 const navLinks = [
@@ -24,6 +24,31 @@ const roles = [
 
 export function Hero() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [activeSection, setActiveSection] = useState("home")
+
+  // Track active section based on scroll position
+  useEffect(() => {
+    const handleScroll = () => {
+      const sections = navLinks.map(link => link.href.replace('#', ''))
+      const headerOffset = 100
+      
+      for (let i = sections.length - 1; i >= 0; i--) {
+        const section = document.getElementById(sections[i])
+        if (section) {
+          const rect = section.getBoundingClientRect()
+          if (rect.top <= headerOffset) {
+            setActiveSection(sections[i])
+            break
+          }
+        }
+      }
+    }
+
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    handleScroll() // Initial check
+    
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
 
   const scrollToSection = useCallback((e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault()
@@ -38,6 +63,7 @@ export function Hero() {
         top: offsetPosition,
         behavior: 'instant'
       })
+      setActiveSection(targetId)
     }
     setMobileMenuOpen(false)
   }, [])
@@ -59,13 +85,13 @@ export function Hero() {
 
             {/* Desktop Navigation */}
             <ul className="hidden md:flex items-center gap-8">
-              {navLinks.map((link, index) => (
+              {navLinks.map((link) => (
                 <li key={link.href}>
                   <a
                     href={link.href}
                     onClick={(e) => scrollToSection(e, link.href)}
                     className={`text-sm font-medium transition-colors hover:text-primary cursor-pointer ${
-                      index === 0 ? "text-primary" : "text-muted-foreground"
+                      activeSection === link.href.replace('#', '') ? "text-primary" : "text-muted-foreground"
                     }`}
                   >
                     {link.label}
@@ -88,13 +114,13 @@ export function Hero() {
           {mobileMenuOpen && (
             <div className="md:hidden py-4 border-t border-border/50">
               <ul className="flex flex-col gap-4">
-                {navLinks.map((link, index) => (
+                {navLinks.map((link) => (
                   <li key={link.href}>
                     <a
                       href={link.href}
                       onClick={(e) => scrollToSection(e, link.href)}
                       className={`block text-sm font-medium transition-colors hover:text-primary cursor-pointer ${
-                        index === 0 ? "text-primary" : "text-muted-foreground"
+                        activeSection === link.href.replace('#', '') ? "text-primary" : "text-muted-foreground"
                       }`}
                     >
                       {link.label}
