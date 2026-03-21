@@ -3,7 +3,7 @@
 import Image from "next/image"
 import Link from "next/link"
 import { useState } from "react"
-import { ExternalLink, Github, ArrowLeft, Code, Palette, Video, Share2, Bot, Globe } from "lucide-react"
+import { ExternalLink, Github, X, Code, Palette, Video, Share2, Bot, Globe } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
 const projectCategories = [
@@ -321,36 +321,35 @@ export function Projects() {
       {/* Category Modal */}
       {selectedCategory && (
         <div 
-          className="fixed inset-0 bg-background z-[60] flex flex-col"
+          className="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center p-4"
           onClick={() => setSelectedCategory(null)}
         >
-          {/* Compact Modal Navbar */}
-          <div className={`bg-gradient-to-r ${selectedCategory.color} px-4 py-3 flex items-center gap-4 shrink-0`}>
-            <button
-              onClick={() => setSelectedCategory(null)}
-              className="flex items-center gap-2 px-3 py-1.5 bg-white/20 hover:bg-white/30 rounded-lg transition-colors text-white"
-            >
-              <ArrowLeft className="w-4 h-4" />
-              <span className="font-medium text-sm">Back</span>
-            </button>
-            
-            <div className="flex items-center gap-3 text-white">
-              <div className="w-8 h-8 rounded-lg bg-white/20 backdrop-blur-sm flex items-center justify-center">
-                <selectedCategory.icon className="w-4 h-4" />
-              </div>
-              <div>
-                <h3 className="text-base font-semibold leading-tight">{selectedCategory.title}</h3>
-                <p className="text-white/80 text-xs hidden sm:block">{selectedCategory.description}</p>
-              </div>
-            </div>
-          </div>
-
-          {/* Modal Content */}
           <div 
-            className="flex-1 overflow-y-auto p-4 md:p-6"
+            className="bg-background rounded-2xl max-w-5xl w-full max-h-[90vh] overflow-hidden shadow-2xl"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="max-w-5xl mx-auto">
+            {/* Modal Header */}
+            <div className={`bg-gradient-to-r ${selectedCategory.color} p-6 text-white relative`}>
+              <button
+                onClick={() => setSelectedCategory(null)}
+                className="absolute top-4 right-4 p-2 hover:bg-white/20 rounded-lg transition-colors"
+              >
+                <X className="w-6 h-6" />
+              </button>
+              
+              <div className="flex items-center gap-4">
+                <div className="w-16 h-16 rounded-xl bg-white/20 backdrop-blur-sm flex items-center justify-center">
+                  <selectedCategory.icon className="w-8 h-8" />
+                </div>
+                <div>
+                  <h3 className="text-2xl font-bold">{selectedCategory.title}</h3>
+                  <p className="text-white/80">{selectedCategory.description}</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Modal Content */}
+            <div className="p-6 overflow-y-auto max-h-[calc(90vh-140px)]">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {selectedCategory.projects.map((project) => (
                   <div
