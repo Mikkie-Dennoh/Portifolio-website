@@ -321,26 +321,24 @@ export function Projects() {
       {/* Category Modal */}
       {selectedCategory && (
         <div 
-          className="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+          className="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-start justify-center pt-24 pb-4 px-4 overflow-y-auto"
           onClick={() => setSelectedCategory(null)}
         >
           <div 
-            className="bg-background rounded-2xl max-w-5xl w-full max-h-[90vh] overflow-hidden shadow-2xl"
+            className="bg-background rounded-2xl max-w-5xl w-full max-h-[calc(100vh-7rem)] overflow-hidden shadow-2xl"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Modal Header */}
             <div className={`bg-gradient-to-r ${selectedCategory.color} p-6 text-white`}>
-              <div className="flex items-center gap-4">
-                <button
-                  onClick={() => setSelectedCategory(null)}
-                  className="flex items-center gap-2 px-4 py-2 bg-white/20 hover:bg-white/30 rounded-lg transition-colors"
-                >
-                  <ArrowLeft className="w-5 h-5" />
-                  <span className="font-medium">Back</span>
-                </button>
-              </div>
+              <button
+                onClick={() => setSelectedCategory(null)}
+                className="flex items-center gap-2 px-4 py-2 bg-white/20 hover:bg-white/30 rounded-lg transition-colors mb-4"
+              >
+                <ArrowLeft className="w-5 h-5" />
+                <span className="font-medium">Back</span>
+              </button>
               
-              <div className="flex items-center gap-4 mt-4">
+              <div className="flex items-center gap-4">
                 <div className="w-16 h-16 rounded-xl bg-white/20 backdrop-blur-sm flex items-center justify-center">
                   <selectedCategory.icon className="w-8 h-8" />
                 </div>
