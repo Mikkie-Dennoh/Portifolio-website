@@ -10,6 +10,7 @@ import { Projects } from "@/components/portfolio/projects"
 import { Blog } from "@/components/portfolio/blog"
 import { Resume } from "@/components/portfolio/resume"
 import { Contact } from "@/components/portfolio/contact"
+import { Footer } from "@/components/portfolio/footer"
 
 
 export default function Home() {
@@ -55,7 +56,7 @@ export default function Home() {
 
       <SectionWrapper isActive={activeSection === "contact"}>
         <Contact />
-        
+        <Footer />
       </SectionWrapper>
     </main>
   )
