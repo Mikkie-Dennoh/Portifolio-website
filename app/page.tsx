@@ -12,6 +12,7 @@ import { Resume } from "@/components/portfolio/resume"
 import { Contact } from "@/components/portfolio/contact"
 import { Footer } from "@/components/portfolio/footer"
 
+
 export default function Home() {
   const [activeSection, setActiveSection] = useState("home")
 
