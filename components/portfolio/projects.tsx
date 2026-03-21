@@ -321,33 +321,32 @@ export function Projects() {
       {/* Category Modal */}
       {selectedCategory && (
         <div 
-          className="fixed inset-0 bg-background z-[60] flex flex-col"
-          onClick={() => setSelectedCategory(null)}
+          className="fixed inset-0 bg-background z-[60] overflow-hidden"
         >
-          {/* Compact Modal Navbar */}
-          <div className={`bg-gradient-to-r ${selectedCategory.color} px-4 py-3 flex items-center gap-4 shrink-0`}>
+          {/* Fixed Compact Modal Navbar */}
+          <div className={`fixed top-0 left-0 right-0 bg-gradient-to-r ${selectedCategory.color} px-4 py-3 flex items-center gap-4 z-[61]`}>
             <button
               onClick={() => setSelectedCategory(null)}
-              className="flex items-center gap-2 px-3 py-1.5 bg-white/20 hover:bg-white/30 rounded-lg transition-colors text-white"
+              className="flex items-center gap-2 px-3 py-2 bg-white/20 hover:bg-white/30 rounded-lg transition-colors text-white"
             >
-              <ArrowLeft className="w-4 h-4" />
-              <span className="font-medium text-sm">Back</span>
+              <ArrowLeft className="w-5 h-5" />
+              <span className="font-medium">Back</span>
             </button>
             
             <div className="flex items-center gap-3 text-white">
-              <div className="w-8 h-8 rounded-lg bg-white/20 backdrop-blur-sm flex items-center justify-center">
-                <selectedCategory.icon className="w-4 h-4" />
+              <div className="w-10 h-10 rounded-lg bg-white/20 backdrop-blur-sm flex items-center justify-center">
+                <selectedCategory.icon className="w-5 h-5" />
               </div>
               <div>
-                <h3 className="text-base font-semibold leading-tight">{selectedCategory.title}</h3>
-                <p className="text-white/80 text-xs hidden sm:block">{selectedCategory.description}</p>
+                <h3 className="text-lg font-semibold leading-tight">{selectedCategory.title}</h3>
+                <p className="text-white/80 text-sm hidden sm:block">{selectedCategory.description}</p>
               </div>
             </div>
           </div>
 
-          {/* Modal Content */}
+          {/* Modal Content with top padding for fixed navbar */}
           <div 
-            className="flex-1 overflow-y-auto p-4 md:p-6"
+            className="h-full overflow-y-auto pt-20 p-4 md:p-6 md:pt-20"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="max-w-5xl mx-auto">
