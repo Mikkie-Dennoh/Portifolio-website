@@ -10,8 +10,8 @@ const socialLinks = [
 
 export function Footer() {
   return (
-    <footer className="py-8 px-4 border-t border-border">
-      <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+    <footer className="py-3 px-4 border-t border-border">
+      <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-2">
         <p className="text-muted-foreground text-sm">
           © {new Date().getFullYear()} Dennis Muriithi. All rights reserved.
         </p>
