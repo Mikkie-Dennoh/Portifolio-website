@@ -12,24 +12,23 @@ const socialLinks = [
 
 export function Footer() {
   return (
-    <footer className="py-4 px-4 border-t border-border/50 bg-background/50 backdrop-blur-sm">
+    <footer className="py-4 px-4 border-t border-border mt-auto shrink-0">
       <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3">
         <p className="text-muted-foreground text-sm">
           {new Date().getFullYear()} Dennis Muriithi
         </p>
 
-        <div className="flex items-center gap-3">
-          {socialLinks.map((link, index) => (
+        <div className="flex items-center gap-4">
+          {socialLinks.map((link) => (
             <Link
               key={link.label}
               href={link.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-muted-foreground hover:text-primary hover:scale-110 transition-all duration-300"
+              className="text-muted-foreground hover:text-primary transition-colors"
               aria-label={link.label}
-              style={{ animationDelay: `${index * 100}ms` }}
             >
-              <link.icon className="w-4 h-4" />
+              <link.icon className="w-5 h-5" />
             </Link>
           ))}
         </div>

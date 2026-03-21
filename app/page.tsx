@@ -26,32 +26,32 @@ export default function Home() {
       
       <SectionWrapper isActive={activeSection === "home"}>
         <Hero onNavigate={handleNavigate} />
-        
+        <Footer />
       </SectionWrapper>
 
       <SectionWrapper isActive={activeSection === "about"}>
         <About />
-        
+        <Footer />
       </SectionWrapper>
 
       <SectionWrapper isActive={activeSection === "experience"}>
         <Experience />
-        
+        <Footer />
       </SectionWrapper>
 
       <SectionWrapper isActive={activeSection === "projects"}>
         <Projects />
-        
+        <Footer />
       </SectionWrapper>
 
       <SectionWrapper isActive={activeSection === "blog"}>
         <Blog />
-        
+        <Footer />
       </SectionWrapper>
 
       <SectionWrapper isActive={activeSection === "resume"}>
         <Resume />
-        
+        <Footer />
       </SectionWrapper>
 
       <SectionWrapper isActive={activeSection === "contact"}>
