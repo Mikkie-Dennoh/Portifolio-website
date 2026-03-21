@@ -3,7 +3,7 @@
 import Image from "next/image"
 import Link from "next/link"
 import { useState } from "react"
-import { ExternalLink, Github, X, Code, Palette, Video, Share2, Bot, Globe } from "lucide-react"
+import { ExternalLink, Github, ArrowLeft, Code, Palette, Video, Share2, Bot, Globe } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
 const projectCategories = [
@@ -329,22 +329,26 @@ export function Projects() {
             onClick={(e) => e.stopPropagation()}
           >
             {/* Modal Header */}
-            <div className={`bg-gradient-to-r ${selectedCategory.color} p-6 text-white relative`}>
-              <button
-                onClick={() => setSelectedCategory(null)}
-                className="absolute top-4 right-4 p-2 hover:bg-white/20 rounded-lg transition-colors"
-              >
-                <X className="w-6 h-6" />
-              </button>
-              
-              <div className="flex items-center gap-4">
-                <div className="w-16 h-16 rounded-xl bg-white/20 backdrop-blur-sm flex items-center justify-center">
-                  <selectedCategory.icon className="w-8 h-8" />
+            <div className={`bg-gradient-to-r ${selectedCategory.color} p-6 text-white`}>
+              <div className="flex items-center justify-between gap-4">
+                <div className="flex items-center gap-4">
+                  <div className="w-14 h-14 rounded-xl bg-white/20 backdrop-blur-sm flex items-center justify-center">
+                    <selectedCategory.icon className="w-7 h-7" />
+                  </div>
+                  <div>
+                    <h3 className="text-2xl font-bold">{selectedCategory.title}</h3>
+                    <p className="text-white/80">{selectedCategory.description}</p>
+                  </div>
                 </div>
-                <div>
-                  <h3 className="text-2xl font-bold">{selectedCategory.title}</h3>
-                  <p className="text-white/80">{selectedCategory.description}</p>
-                </div>
+                
+                {/* Back Button aligned with description */}
+                <button
+                  onClick={() => setSelectedCategory(null)}
+                  className="flex items-center gap-2 px-4 py-2 bg-white/20 hover:bg-white/30 rounded-lg transition-colors shrink-0"
+                >
+                  <ArrowLeft className="w-5 h-5" />
+                  <span className="font-medium hidden sm:inline">Back</span>
+                </button>
               </div>
             </div>
 
