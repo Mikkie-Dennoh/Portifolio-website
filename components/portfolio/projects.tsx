@@ -3,7 +3,7 @@
 import Image from "next/image"
 import Link from "next/link"
 import { useState } from "react"
-import { ExternalLink, Github, X, Code, Palette, Video, Share2, Bot, Globe } from "lucide-react"
+import { ExternalLink, Github, ArrowLeft, Code, Palette, Video, Share2, Bot, Globe } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
 const projectCategories = [
@@ -329,12 +329,14 @@ export function Projects() {
             onClick={(e) => e.stopPropagation()}
           >
             {/* Modal Header */}
-            <div className={`bg-gradient-to-r ${selectedCategory.color} p-6 text-white relative`}>
+            <div className={`bg-gradient-to-r ${selectedCategory.color} p-6 text-white`}>
+              {/* Back Button */}
               <button
                 onClick={() => setSelectedCategory(null)}
-                className="absolute top-4 right-4 p-2 hover:bg-white/20 rounded-lg transition-colors"
+                className="flex items-center gap-2 px-4 py-2 mb-4 bg-white/20 hover:bg-white/30 rounded-lg transition-colors"
               >
-                <X className="w-6 h-6" />
+                <ArrowLeft className="w-5 h-5" />
+                <span className="font-medium">Back to Projects</span>
               </button>
               
               <div className="flex items-center gap-4">
